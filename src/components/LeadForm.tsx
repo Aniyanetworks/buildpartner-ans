@@ -271,6 +271,7 @@ export default function LeadForm() {
   const submit = async () => {
     setStatus("sending");
     setServerError("");
+    const eventId = crypto.randomUUID();  
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
@@ -283,6 +284,7 @@ export default function LeadForm() {
           consent_non_marketing: consentNonMarketing,
           website: honeypot,
           page_url: window.location.href,
+          event_id: eventId,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
@@ -291,6 +293,7 @@ export default function LeadForm() {
         setStatus("error");
         return;
       }
+      window.dataLayer?.push({ event: "lead_submitted", event_id: eventId });
       setStatus("success");
     } catch {
       setServerError("Network error. Please check your connection and try again.");

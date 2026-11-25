@@ -13,6 +13,7 @@ type LeadPayload = {
   consent_non_marketing: boolean;
   website?: string;
   page_url?: string;
+  event_id?: string;
 };
 
 const str = (v: unknown, max: number) =>
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
     consent_marketing: body.consent_marketing === true,
     consent_non_marketing: body.consent_non_marketing === true,
     page_url: str(body.page_url, 500),
+    event_id: str(body.event_id, 64),
   };
 
   const phoneDigits = lead.phone.replace(/\D/g, "");
