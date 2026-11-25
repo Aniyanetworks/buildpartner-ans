@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { company } from "@/lib/data";
@@ -41,6 +42,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-canvas text-ink antialiased">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtm.js?id=GTM-TQW2N22H"
+        strategy="afterInteractive"
+      />
+      <Script id="gtm-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        `}
+      </Script>
     </html>
   );
 }
