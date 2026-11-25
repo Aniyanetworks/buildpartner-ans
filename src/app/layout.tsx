@@ -40,20 +40,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body className="min-h-full flex flex-col bg-canvas text-ink antialiased">
+        <Script id="gtm-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          `}
+        </Script>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-TQW2N22H"
+          strategy="afterInteractive"
+        />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtm.js?id=GTM-TQW2N22H"
-        strategy="afterInteractive"
-      />
-      <Script id="gtm-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        `}
-      </Script>
     </html>
   );
 }
