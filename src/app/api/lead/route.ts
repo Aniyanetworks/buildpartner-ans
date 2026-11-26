@@ -14,6 +14,8 @@ type LeadPayload = {
   website?: string;
   page_url?: string;
   event_id?: string;
+  fbc?: string;
+  fbp?: string;
 };
 
 const str = (v: unknown, max: number) =>
@@ -47,6 +49,8 @@ export async function POST(request: Request) {
     consent_non_marketing: body.consent_non_marketing === true,
     page_url: str(body.page_url, 500),
     event_id: str(body.event_id, 64),
+    fbc: str(body.fbc, 255),
+    fbp: str(body.fbp, 255),
   };
 
   const phoneDigits = lead.phone.replace(/\D/g, "");

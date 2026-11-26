@@ -12,6 +12,9 @@ import {
 } from "framer-motion";
 import { company, whatWeBuild } from "@/lib/data";
 
+const getCookie = (n: string) =>
+  document.cookie.split("; ").find((c) => c.startsWith(n + "="))?.split("=")[1] ?? "";
+
 type Values = {
   first_name: string;
   last_name: string;
@@ -22,6 +25,7 @@ type Values = {
 };
 type Errors = Partial<Record<keyof Values, string>>;
 type Status = "idle" | "sending" | "success" | "error";
+
 
 const STEPS = [
   { label: "About you", title: "Tell us where to reach you.", hint: "Takes about a minute." },
@@ -285,6 +289,8 @@ export default function LeadForm() {
           website: honeypot,
           page_url: window.location.href,
           event_id: eventId,
+          fbc: getCookie("_fbc"),
+          fbp: getCookie("_fbp"),
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
