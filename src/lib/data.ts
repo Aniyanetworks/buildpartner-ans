@@ -9,6 +9,11 @@ export const company = {
   legalEffectiveDate: "September 24, 2026",
 };
 
+export const socialLinks = [
+  { label: "Instagram", href: "https://www.instagram.com/buildpartnercc" },
+  { label: "Facebook", href: "https://www.facebook.com/buildpartner" },
+];
+
 export const navLinks = [
   { label: "Why Us", href: "#why-us" },
   { label: "What We Build", href: "#what-we-build" },

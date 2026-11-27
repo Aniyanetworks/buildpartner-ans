@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, navLinks } from "@/lib/data";
+import { company, navLinks, socialLinks } from "@/lib/data";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -60,6 +60,23 @@ export default function Footer() {
           >
             Terms of Service
           </Link>
+        </div>
+        <div className="flex flex-col gap-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
+            Follow
+          </span>
+          {socialLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
+              className="text-sm text-ink-soft transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
 
